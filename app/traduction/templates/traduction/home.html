@@ -1,0 +1,89 @@
+<!-- translator/templates/translator/home.html -->
+{% extends "./base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traducteur Darija</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #2a2a2a; /* Fond sombre */
+            color: rgb(255, 255, 255);
+            border: 1px solid #444;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .translation {
+            margin-top: 20px;
+        }
+        .error-message {
+            color: #ff4444;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Traducteur Darija</h1>
+
+    <!-- Formulaire de traduction -->
+    <form method="post" action="{% url 'traducteur' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="darijaInput">Texte en Darija :</label>
+            <!-- Affichez le texte en Darija soumis précédemment dans le champ -->
+            <textarea id="darijaInput" name="darija_text" class="form-control" rows="4" placeholder="Entrez une phrase en Darija">{{ darija_text }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Traduire</button>
+    </form>
+
+    <!-- Afficher la traduction ou le message d'erreur -->
+    {% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+    {% endif %}
+
+    {% if translation %}
+    <div class="translation mt-4">
+        <h2>Traduction en Anglais :</h2>
+        <!-- Afficher la traduction ici -->
+        <textarea id="englishTranslation" class="form-control" rows="4" readonly>{{ translation }}</textarea>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Effacer le champ de traduction anglaise lorsque du texte est saisi dans le champ Darija
+    document.getElementById("darijaInput").addEventListener("input", function() {
+        document.getElementById("englishTranslation").value = "";
+    });
+</script>
+
+</body>
+</html>
+{% endblock %}

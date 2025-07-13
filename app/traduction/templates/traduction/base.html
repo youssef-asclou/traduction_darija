@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <title>{% block title %}Document{% endblock %}</title>
+
+    <style>
+        /* Custom styles for sidebar */
+        #mySidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        #mySidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #mySidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        #mySidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background-color: #5bc598;
+            color: #000;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 90px;
+        }
+    </style>
+</head>
+<body>
+{% load static %}
+<!-- Button to open sidebar -->
+<div id="main" class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+        <button class="openbtn mr-2" onclick="openNav()">☰</button>
+        <h1 class="m-0">Traducteur Darija <img src="{% static 'image/Logo_traduction.png'%}" alt="Icon" style="width: 40px; height: 40px;"></h1>
+    </div>
+    <div class="user-avatar">
+        YA
+    </div>
+</div>
+
+<!-- Sidebar content -->
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Home</a>
+    <a href="#">Paramètres</a>
+    <a href="#">À propos</a>
+</div>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col">
+            <div class="content">
+                {% block content %}
+                <!-- Default content can go here -->
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for sidebar functionality -->
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
+
+<!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+venv/
+.env
+.idea
+.qodana.yaml
+translate.iml
+app/model/seq2seq_model.pth
